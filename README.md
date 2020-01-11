@@ -14,7 +14,8 @@ The process is divided into two parts:
 1. You need to install tensorflow, keras library, tkinter library, cv2 and pandas.
 2. The training has been done using 65 epochs. 
    You can change the number of epochs in the training_model.py file.
-   To increase the accuracy, you can increase epochs and number of CNN layers and run training_model.py file.   
+   To increase the accuracy, you can increase epochs and number of CNN layers and run training_model.py file. 
+3. I have used fer2013 dataset for training. You can download this dataset from Kaggle.
 
 
 ####Usage
