@@ -13,7 +13,7 @@ from keras.models import Sequential
 validation_split = .2
 input_shape = (64, 64, 1)
 batch_size = 32  #in each iteration, we consider 32 training examples at once
-num_epochs = 65   # we iterate 200 times over the entire training set
+num_epochs = 90   # we iterate 90 times over the entire training set
 verbose = 1
 num_classes = 7
 patience = 50
