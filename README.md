@@ -11,5 +11,16 @@ The process is divided into two parts:
       
 ####Important Notes:
 
+1. You need to install tensorflow, keras library, tkinter library, cv2 and pandas.
+2. The training has been done using 65 epochs. 
+   You can change the number of epochs in the training_model.py file.
+   To increase the accuracy, you can increase epochs and number of CNN layers and run training_model.py file.   
+
 
 ####Usage
+1. First activate the tensorflow library using below command:
+-----source ~/tensorflow/bin/activate
+2. Run the predict.py file
+-----python predict.py
+After execuing this file, you will be prompted for input (image).
+Upload the image and you will be getting the output as emotion label and stress value.
