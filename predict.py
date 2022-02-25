@@ -6,12 +6,13 @@ from datasets import get_labels
 from preprocess import preprocess_input
 from keras.preprocessing import image
 import math
-
-import Tkinter as tk
-import ttk
-from Tkinter import *
+import tkinter as tk
+from tkinter import ttk
+from tkinter.ttk import Label
+from tkinter import *
 from PIL import Image,ImageTk
-from tkFileDialog import askopenfilename
+from tkinter import filedialog
+#from tkFileDialog import askopenfilename
 
 
 
@@ -28,20 +29,20 @@ back = tk.Frame(master=root,bg='black')
 #win = swin.window
 
 def clicked():
-        
-        label = tk.Label(root)
-        #load the file path
-        image_path = askopenfilename()
-        print image_path
-        #open the image
-        image_path1 = Image.open(image_path)
-        image_path1 = image_path1.resize((200, 200), Image.ANTIALIAS)
-        label.image_path1 = ImageTk.PhotoImage(image_path1)
-        label['image'] = label.image_path1
-        label.pack()
+		
+	label = tk.Label(root)
+	#load the file path
+	image_path = filedialog.askopenfilename()
+	#print(image_path)
+	#open the image
+	image_path1 = Image.open(image_path)
+	image_path1 = image_path1.resize((200, 200), Image.ANTIALIAS)
+	label.image_path1 = ImageTk.PhotoImage(image_path1)
+	label['image'] = label.image_path1
+	label.pack()
 
-        detection_model_path = '/home/akanksha/code/trained_models/detection_models/haarcascade_frontalface_default.xml'
-	emotion_model_path = '/home/akanksha/code/trained_models/emotion_modelsfer2013_mini_XCEPTION.86-0.43.hdf5'
+	detection_model_path = '/Users/Ramanuj/Downloads/stress_detection-master/trained_models/detection_models/haarcascade_frontalface_default.xml'
+	emotion_model_path = '/Users/Ramanuj/Downloads/stress_detection-master/trained_models/emotion_modelsfer2013_mini_XCEPTION.86-0.43.hdf5'
 	emotion_labels = get_labels('fer2013')
 
 	#loading models
@@ -62,8 +63,8 @@ def clicked():
 	faces = face_detection.detectMultiScale(gray_image, 1.3, 5)
 	if (len(faces)==0):
 		print("Please enter a valid image!")
-		z = Label(root, text='Please enter a valid image!',background="white")
-	        z.pack()
+		z = ttk.Label(root, text='Please enter a valid image!',background="white")
+		z.pack()
 	
 	var = 0
 	for (x, y, w, h) in faces:
@@ -86,18 +87,18 @@ def clicked():
 		var = np.amax(emotion_proba)
 		print("Maximum probability emotion: ")
 		print(var)
-		c = Label(root, text='MAXIMUM PROBABILITY EMOTION: ',background="white")
-	        c.pack()
-		d = Label(root, text=var,background="white")
-	        d.pack()
-	        f = Label(root, text="EMOTION LABEL: ",background="white")
-	        f.pack()
-	        e = Label(root, text=emotion_text,background="white")
-	        e.pack()
+		c = ttk.Label(root, text='MAXIMUM PROBABILITY EMOTION: ',background="white")
+		c.pack()
+		d = ttk.Label(root, text=var,background="white")
+		d.pack()
+		f = ttk.Label(root, text="EMOTION LABEL: ",background="white")
+		f.pack()
+		e = ttk.Label(root, text=emotion_text,background="white")
+		e.pack()
 		
 		
 		var = var * 100
-		if(emotion_text == "anger"):
+		if(emotion_text == "angry"):
 			S = 2.36*(math.log(0.33*var + 1.00))
 
 		elif(emotion_text == "disguist"):
@@ -119,16 +120,16 @@ def clicked():
 			S = 5.05*(math.log(0.015*var + 1.016))
 
 		print("Stress Value:")
-	   	print(S)
-		a = Label(root, text='STRESS VALUE(range:0-9): ',background="white")
+		print(S)
+		a = ttk.Label(root, text='STRESS VALUE(range:0-9): ',background="white")
 		a.pack()
-		b = Label(root, text=S,background="white")
+		b = ttk.Label(root, text=S,background="white")
 		b.pack()
 	
 w = Label(root, text="STRESS DETECTION MODEL", font=("Times new roman", 16),fg="blue", background="white")
 w.pack()
 b1 = tk.Button(root, text = "Upload Image", command = clicked, compound=LEFT,background="white")
 b1.pack()
+b2 = tk.Button(root, text = "Exit", command = lambda : root.quit(), compound=LEFT,background="white")
+b2.pack()
 root.mainloop()
-
-
